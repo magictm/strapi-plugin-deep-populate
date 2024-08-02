@@ -28,22 +28,22 @@ Strapi v4 - (current) - v1.x
 
 Tested on Strapi v4.25.4.
 
-## 💻 1. Install
+## 💻 Install
 
-### Install the plugin
+### 1. Install the plugin
 
 ```bash
 npm install @magictm/strapi-plugin-deep-populate
 ```
 
-## 2. Enable the plugin
+### 2. Enable the plugin
 
 Navigate to your Strapi project's configuration file:
 `<strapi app root>/config/plugins.js` or `.ts`
 
 Add the following code snippet:
 
-### Minimal configuration:
+#### Minimal configuration:
 
 ```ts
 'magictm-deep-populate': {
@@ -51,7 +51,7 @@ Add the following code snippet:
 }
 ```
 
-### Advanced configuration
+#### Advanced configuration
 
 ```ts
 'magictm-deep-populate': {
@@ -73,7 +73,7 @@ Add the following code snippet:
 }
 ```
 
-### Full example (typescript)
+#### Full example (typescript)
 
 ```ts
 export default () => ({
@@ -85,7 +85,7 @@ export default () => ({
 })
 ```
 
-## 3. (Re)Start Your Application
+### 3. (Re)Start Your Application
 
 For the changes to take effect, restart your Strapi application:
 
@@ -93,7 +93,7 @@ For the changes to take effect, restart your Strapi application:
 npm run develop
 ```
 
-## 4. 🚀 Usage
+## 🚀 Usage
 
 The MagicTM Deep Populate plugin seamlessly integrates with your existing Strapi API. Here's how to use it:
 

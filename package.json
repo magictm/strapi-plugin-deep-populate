@@ -1,0 +1,93 @@
+{
+    "version": "0.0.0",
+    "type": "commonjs",
+    "exports": {
+        "./strapi-server": {
+            "types": "./dist/server/src/index.d.ts",
+            "source": "./server/src/index.ts",
+            "import": "./dist/server/index.mjs",
+            "require": "./dist/server/index.js",
+            "default": "./dist/server/index.js"
+        },
+        "./package.json": "./package.json"
+    },
+    "files": [
+        "dist",
+        "strapi-server.js"
+    ],
+    "scripts": {
+        "build": "strapi plugin:build --force",
+        "watch": "strapi plugin:watch",
+        "watch:link": "strapi plugin:watch:link",
+        "verify": "strapi plugin:verify --debug",
+        "test:ts:back": "run -T tsc -p server/tsconfig.json",
+        "npm:publish": "npm publish --access public"
+    },
+    "dependencies": {
+        "@mobily/ts-belt": "^3.13.1",
+        "@strapi/design-system": "^1.19.0",
+        "@strapi/helper-plugin": "^4.25.4",
+        "@strapi/icons": "^1.19.0"
+    },
+    "devDependencies": {
+        "@strapi/strapi": "^4.25.4",
+        "@strapi/typescript-utils": "^4.25.4",
+        "@types/react": "^18.3.3",
+        "@types/react-dom": "^18.3.0",
+        "@types/react-router-dom": "^5.3.3",
+        "@types/styled-components": "^5.1.32",
+        "@types/uuid": "^10.0.0",
+        "prettier": "^3.3.3",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-intl": "^6.6.8",
+        "react-router-dom": "^5.3.4",
+        "styled-components": "^5.3.3",
+        "typescript": "^5.5.3"
+    },
+    "peerDependencies": {
+        "@strapi/strapi": "^4.25.4",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-router-dom": "^5.2.0",
+        "styled-components": "^5.2.1"
+    },
+    "strapi": {
+        "kind": "plugin",
+        "name": "magictm-deep-populate",
+        "displayName": "Deep populate by MagicTM (m7rlin)",
+        "description": "Adds better deep populate support for Strapi."
+    },
+    "name": "@magictm/strapi-plugin-deep-populate",
+    "description": "Adds better deep populate support for Strapi.",
+    "license": "LGPL-2.1",
+    "author": "Marcin Stawowczyk m7rlin <merlin@magictm.com>",
+    "maintainers": [
+        {
+            "name": "Marcin Stawowczyk m7rlin <merlin@magictm.com>"
+        }
+    ],
+    "engines": {
+        "node": ">=18.x.x <=20.x.x",
+        "npm": ">=10.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/magictm/strapi-plugin-deep-populate.git"
+    },
+    "bugs": {
+        "url": "https://github.com/magictm/strapi-plugin-deep-populate/issues"
+    },
+    "homepage": "https://github.com/magictm/strapi-plugin-deep-populate#readme",
+    "keywords": [
+        "strapi",
+        "strapi v4",
+        "strapi plugin",
+        "strapi deep populate",
+        "magictm",
+        "m7rlin",
+        "strapi nested data",
+        "simplify api responses",
+        "strapi community"
+    ]
+}

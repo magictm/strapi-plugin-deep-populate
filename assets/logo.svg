@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke: #231f20;
+        stroke-miterlimit: 10;
+        stroke-width: 16px;
+      }
+
+      .cls-2 {
+        fill: #ec008c;
+      }
+
+      .cls-3 {
+        fill: #7968ae;
+      }
+
+      .cls-4 {
+        fill: #fff;
+        stroke-width: 0px;
+      }
+
+      .cls-5 {
+        fill: #231f20;
+        font-family: MyriadPro-Regular, 'Myriad Pro';
+        font-size: 462.45px;
+      }
+    </style>
+  </defs>
+  <rect id="bg" class="cls-4" width="500" height="500"/>
+  <rect class="cls-1" x="31.54" y="31.12" width="440.21" height="440.21" rx="15.72" ry="15.72"/>
+  <circle class="cls-3" cx="54.25" cy="53.83" r="22.71"/>
+  <circle class="cls-3" cx="449.04" cy="448.62" r="22.71"/>
+  <circle class="cls-2" cx="332.86" cy="380.88" r="22.71"/>
+  <circle class="cls-2" cx="364.18" cy="322.56" r="22.71"/>
+  <circle class="cls-2" cx="329.13" cy="276.3" r="15.25"/>
+  <circle class="cls-2" cx="379.43" cy="265.75" r="15.25"/>
+  <circle class="cls-2" cx="344.38" cy="228.42" r="15.25"/>
+  <circle class="cls-2" cx="364.18" cy="185.8" r="12.29"/>
+  <circle class="cls-2" cx="297.34" cy="324.81" r="22.71"/>
+  <text class="cls-5" transform="translate(76.96 412.14)"><tspan x="0" y="0">P</tspan></text>
+</svg>

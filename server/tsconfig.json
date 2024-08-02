@@ -1,0 +1,12 @@
+{
+    "extends": "@strapi/typescript-utils/tsconfigs/server",
+    "include": ["./", "src/**/*.json"],
+    "compilerOptions": {
+        "rootDir": "../",
+        "baseUrl": ".",
+        "target": "es6",
+        "module": "commonjs",
+        "lib": ["es6", "es2015", "dom"],
+        "allowJs": true //enables the build without .ts files
+    }
+}
