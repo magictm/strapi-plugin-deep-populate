@@ -9,6 +9,9 @@ jobs:
     release:
         name: 🚀 release
         runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [20]
         permissions:
             contents: write
         steps:
@@ -16,16 +19,31 @@ jobs:
               uses: actions/checkout@v3
               with:
                   fetch-depth: 0
-            - name: create release
+
+            - name: Install pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 9
+
+            - name: 🟢 Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  registry-url: https://registry.npmjs.org
+                  cache: 'pmpm'
+
+            - name: Install dependencies
+              run: pmpm install
+
+            - name: Build
+              run: pnpm run build
+
+            - name: Create release
               uses: ncipollo/release-action@v1
               with:
                   generateReleaseNotes: true
-            - name: 🟢 node
-              uses: actions/setup-node@v3
-              with:
-                  node-version: 18
-                  registry-url: https://registry.npmjs.org
-            - name: 🚀 publish to NPM
+
+            - name: 🚀 Publish to NPM
               run: npm publish --access public
               env:
                   NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

@@ -1,5 +1,5 @@
 {
-    "version": "1.0.2",
+    "version": "1.0.3",
     "type": "commonjs",
     "exports": {
         "./strapi-server": {
@@ -21,8 +21,7 @@
         "watch:link": "strapi plugin:watch:link",
         "verify": "strapi plugin:verify --debug",
         "test:ts:back": "run -T tsc -p server/tsconfig.json",
-        "npm:publish": "npm publish --access public",
-        "prepare": "npm run build"
+        "npm:publish": "npm publish --access public"
     },
     "dependencies": {
         "@mobily/ts-belt": "^3.13.1",
