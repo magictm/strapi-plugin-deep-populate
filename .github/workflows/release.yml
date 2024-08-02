@@ -9,6 +9,22 @@ jobs:
     release:
         name: 🚀 release
         runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - name: 📚 checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Create release
+              uses: ncipollo/release-action@v1
+              with:
+                  generateReleaseNotes: true
+
+    publish:
+        name: 🚀 release
+        runs-on: ubuntu-latest
         strategy:
             matrix:
                 node-version: [20]
@@ -30,18 +46,13 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
                   registry-url: https://registry.npmjs.org
-                  cache: 'pmpm'
+                  cache: 'pnpm'
 
             - name: Install dependencies
-              run: pmpm install
+              run: pnpm install
 
             - name: Build
               run: pnpm run build
-
-            - name: Create release
-              uses: ncipollo/release-action@v1
-              with:
-                  generateReleaseNotes: true
 
             - name: 🚀 Publish to NPM
               run: npm publish --access public
