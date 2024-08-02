@@ -1,5 +1,5 @@
 {
-    "version": "1.0.5",
+    "version": "1.0.6",
     "type": "commonjs",
     "exports": {
         "./strapi-server": {
@@ -19,7 +19,7 @@
         "build": "strapi plugin:build --force",
         "watch": "strapi plugin:watch",
         "watch:link": "strapi plugin:watch:link",
-        "verify": "strapi plugin:verify --debug",
+        "verify": "strapi plugin:verify",
         "test:ts:back": "run -T tsc -p server/tsconfig.json",
         "npm:publish": "npm publish --access public"
     },

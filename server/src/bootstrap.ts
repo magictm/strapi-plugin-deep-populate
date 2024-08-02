@@ -3,9 +3,18 @@ import pluginId from './pluginId'
 
 import { getFullPopulateObject, validatePopulateIgnore } from './utils/utils'
 
+interface PluginConfig {
+    minDepth: number
+    maxDepth: number
+    skipCreatorFields: boolean
+    debug: boolean
+    allowedModels: string[]
+    ignore: string[]
+}
+
 const bootstrap = ({ strapi }: { strapi: Strapi }) => {
     // Get the plugin config
-    const { minDepth, maxDepth, skipCreatorFields, debug, allowedModels, ignore } =
+    const { minDepth, maxDepth, skipCreatorFields, debug, allowedModels, ignore }: PluginConfig =
         strapi.config.get('plugin.' + pluginId)
 
     strapi.db.lifecycles.subscribe((event) => {
@@ -64,10 +73,14 @@ const bootstrap = ({ strapi }: { strapi: Strapi }) => {
                     debug
                 )
 
-                debug && console.log('POPULATE OBJECT:', populateObject.populate)
+                debug && console.log('POPULATE OBJECT:', populateObject) // Debug
 
                 // Override the populate object with the one returned from the function
-                event.params.populate = populateObject.populate
+                if (typeof populateObject === 'object') {
+                    event.params.populate = populateObject.populate
+                } else {
+                    event.params.populate = true
+                }
             }
         }
     })
