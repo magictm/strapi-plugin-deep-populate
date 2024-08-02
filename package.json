@@ -21,7 +21,8 @@
         "watch:link": "strapi plugin:watch:link",
         "verify": "strapi plugin:verify --debug",
         "test:ts:back": "run -T tsc -p server/tsconfig.json",
-        "npm:publish": "npm publish --access public"
+        "npm:publish": "npm publish --access public",
+        "prepare": "npm run build"
     },
     "dependencies": {
         "@mobily/ts-belt": "^3.13.1",
