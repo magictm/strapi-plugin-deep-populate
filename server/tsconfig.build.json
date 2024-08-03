@@ -5,6 +5,8 @@
     "compilerOptions": {
         "rootDir": "../",
         "baseUrl": ".",
-        "outDir": "./dist"
+        "outDir": "./dist",
+        "target": "ES6",
+        "module": "commonjs"
     }
 }
