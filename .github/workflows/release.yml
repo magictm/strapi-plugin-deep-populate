@@ -33,8 +33,6 @@ jobs:
         steps:
             - name: 📚 checkout
               uses: actions/checkout@v4
-              with:
-                  fetch-depth: 0
 
             - name: Install pnpm
               uses: pnpm/action-setup@v4

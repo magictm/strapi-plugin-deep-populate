@@ -1,14 +1,3 @@
-interface PluginConfig {
-    default: {
-        minDepth: number
-        maxDepth: number
-        skipCreatorFields: boolean
-        ignore: string[]
-        debug: boolean
-        allowedModels: string[]
-    }
-}
-
 export default {
     default: {
         minDepth: 5,

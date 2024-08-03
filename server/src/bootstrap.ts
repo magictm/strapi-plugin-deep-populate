@@ -3,7 +3,7 @@ import pluginId from './pluginId'
 
 import { getFullPopulateObject, validatePopulateIgnore } from './utils/utils'
 
-interface PluginConfig {
+export interface PluginConfig {
     minDepth: number
     maxDepth: number
     skipCreatorFields: boolean
