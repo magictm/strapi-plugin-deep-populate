@@ -6,7 +6,6 @@
         "rootDir": "../",
         "baseUrl": ".",
         "outDir": "./dist",
-        "target": "ES6",
-        "module": "commonjs"
+        "incremental": false
     }
 }
