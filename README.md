@@ -28,6 +28,10 @@ Strapi v4 - (current) - v1.x
 
 Tested on Strapi v4.25.4.
 
+## Motivation
+
+This plugin is an extension of https://github.com/Barelydead/strapi-plugin-populate-deep created by @Barelydead. Due to the lack of development of the plugin, I decided to extend the plugin with some features I need and share it with the community.
+
 ## 💻 Install
 
 ### 1. Install the plugin
@@ -114,6 +118,8 @@ For finer control, specify the desired depth level numerically after the `deep` 
 ```
 
 This fetches articles with relations populated up to 10 levels deep, or the maximum depth set in the plugin configuration – whichever is lower. This ensures your API responses remain performant even with large datasets.
+
+> Please note! Using `?populate=deep,1` with depth of 1 will always return all relations with depth 1. Works same as `?populate=*`. `populateIgnore` will as well not work.
 
 ### Excluding Specific Fields from Population
 

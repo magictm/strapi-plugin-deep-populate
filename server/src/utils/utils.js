@@ -31,6 +31,7 @@ export function getFullPopulateObject(
     debug = false
 ) {
     if (maxDepth <= 1) {
+        debug && console.log('maxDepth reached, skipping')
         return true
     }
     if (modelUid === 'admin::user' && skipCreatorFields) {
@@ -45,6 +46,7 @@ export function getFullPopulateObject(
     )
 
     for (const [attrName, attrObject] of attributes) {
+        // console.log('attrName:', attrName, ' :', model.collectionName + '.' + attrName)
         if (ignore.has(attrName) || ignore.has(model.collectionName + '.' + attrName)) {
             continue
         }

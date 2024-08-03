@@ -73,7 +73,7 @@ const bootstrap = ({ strapi }: { strapi: Strapi }) => {
                     debug
                 )
 
-                debug && console.log('POPULATE OBJECT:', populateObject) // Debug
+                debug && console.log('POPULATE OBJECT:', JSON.stringify(populateObject, null, 2)) // Debug
 
                 // Override the populate object with the one returned from the function
                 if (typeof populateObject === 'object') {
