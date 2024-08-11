@@ -60,7 +60,7 @@
     },
     "name": "@magictm/strapi-plugin-deep-populate",
     "description": "Adds better deep populate support for Strapi.",
-    "license": "LGPL-2.1",
+    "license": "MIT",
     "author": "Marcin Stawowczyk m7rlin <merlin@magictm.com>",
     "maintainers": [
         {

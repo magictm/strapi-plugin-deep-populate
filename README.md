@@ -160,6 +160,6 @@ We appreciate all sponsors! Please contact us if you're interested in sponsoring
 
 ## 📜 License
 
-LGPL-2.1 License © 2024-PRESENT Marcin Stawowczyk (m7rlin)
+MIT License © 2024-PRESENT Marcin Stawowczyk (m7rlin)
 
 Thank you for using the MagicTM Deep Populate Strapi Plugin! Let me know if you have any other questions.
