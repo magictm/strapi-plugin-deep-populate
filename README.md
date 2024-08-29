@@ -26,7 +26,7 @@
 
 Strapi v4 - (current) - v1.x
 
-Tested on Strapi v4.25.4.
+Tested on Strapi v4.25.8.
 
 ## Motivation
 
