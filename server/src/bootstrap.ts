@@ -2,20 +2,19 @@ import type { Strapi } from '@strapi/strapi'
 import pluginId from './pluginId'
 
 import { getFullPopulateObject, validatePopulateIgnore } from './utils/utils'
-
-export interface PluginConfig {
-    minDepth: number
-    maxDepth: number
-    skipCreatorFields: boolean
-    debug: boolean
-    allowedModels: string[]
-    ignore: string[]
-}
+import { PluginConfig } from './config/schema'
 
 const bootstrap = ({ strapi }: { strapi: Strapi }) => {
     // Get the plugin config
-    const { minDepth, maxDepth, skipCreatorFields, debug, allowedModels, ignore }: PluginConfig =
-        strapi.config.get('plugin.' + pluginId)
+    const {
+        minDepth,
+        maxDepth,
+        skipCreatorFields,
+        debug,
+        allowedModels,
+        ignoreFields,
+        ignorePaths,
+    }: PluginConfig = strapi.config.get('plugin.' + pluginId)
 
     strapi.db.lifecycles.subscribe((event) => {
         if (event.action === 'beforeFindMany' || event.action === 'beforeFindOne') {
@@ -26,9 +25,10 @@ const bootstrap = ({ strapi }: { strapi: Strapi }) => {
             const { populate } = event.params
 
             const queryParams = ctx?.request?.query || {}
-            const populateIgnore = validatePopulateIgnore(queryParams.populateIgnore)
+            const populateIgnoreFields = validatePopulateIgnore(queryParams.populateIgnore)
+            const populateIgnorePaths = validatePopulateIgnore(queryParams.populateIgnorePaths)
 
-            debug && console.log('populateIgnore', populateIgnore) // Debug
+            debug && console.log('populateIgnore', populateIgnoreFields) // Debug
 
             if (populate && populate[0] === 'deep') {
                 let depth = parseInt(populate[1], 10) || minDepth
@@ -43,33 +43,52 @@ const bootstrap = ({ strapi }: { strapi: Strapi }) => {
                     return
                 }
 
-                const ignored = new Set()
+                const ignoredFields = new Set()
 
                 // Add the ignored fields from the config
-                if (ignore.length) {
-                    ignore.forEach((field) => ignored.add(field))
+                if (ignoreFields.length) {
+                    ignoreFields.forEach((field) => ignoredFields.add(field))
                 }
 
-                // Add the ignored fields from the query params
-                if (populateIgnore.length) {
-                    populateIgnore.forEach((field) => ignored.add(field))
+                // Add the ignoredFields fields from the query params
+                if (populateIgnoreFields.length) {
+                    populateIgnoreFields.forEach((field) => ignoredFields.add(field))
+                }
+
+                const ignoredPaths = new Set()
+
+                // Add the ignored paths from the config
+                if (ignorePaths.length) {
+                    ignorePaths.forEach((path) => ignoredPaths.add(path))
+                }
+
+                // Add the ignoredPaths paths from the query params
+                if (populateIgnorePaths.length) {
+                    populateIgnorePaths.forEach((path) => ignoredPaths.add(path))
                 }
 
                 // Debug
                 debug &&
                     console.log(
-                        'request settings model',
+                        'Request Settings:',
+                        'Model:',
                         model.uid,
+                        'Depth:',
                         limitedDepth,
+                        'Skip Creator Fields:',
                         skipCreatorFields,
-                        ignored
+                        'Ignored Fields:',
+                        ignoredFields,
+                        'Ignored Paths:',
+                        ignoredPaths
                     )
 
                 let populateObject = getFullPopulateObject(
                     model.uid,
                     limitedDepth,
                     skipCreatorFields,
-                    ignored,
+                    ignoredFields,
+                    ignoredPaths,
                     debug
                 )
 

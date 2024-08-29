@@ -27,11 +27,13 @@ export function getFullPopulateObject(
     modelUid,
     maxDepth,
     skipCreatorFields,
-    ignore = new Set(),
-    debug = false
+    ignoreFields = new Set(),
+    ignorePaths = new Set(),
+    debug = false,
+    parentPath = ''
 ) {
     if (maxDepth <= 1) {
-        debug && console.log('maxDepth reached, skipping')
+        // debug && console.log('maxDepth reached, skipping')
         return true
     }
     if (modelUid === 'admin::user' && skipCreatorFields) {
@@ -46,12 +48,33 @@ export function getFullPopulateObject(
     )
 
     for (const [attrName, attrObject] of attributes) {
+        const fullFieldName = parentPath ? `${parentPath}.${attrName}` : attrName
+
         // console.log('attrName:', attrName, ' :', model.collectionName + '.' + attrName)
-        if (ignore.has(attrName) || ignore.has(model.collectionName + '.' + attrName)) {
+
+        // Check if the field is ignored (using attrName)
+        if (ignoreFields.has(attrName) || ignoreFields.has(model.collectionName + '.' + attrName)) {
+            debug && console.log(`Ignoring field: ${model.collectionName + '.' + attrName}`)
             continue
         }
 
-        debug && console.log('attrObject', attrName, attrObject)
+        // Check if the field is ignored (using fullFieldName)
+        if (ignorePaths.has(fullFieldName)) {
+            debug && console.log(`Ignoring field: ${fullFieldName}`)
+            continue
+        }
+
+        if (debug) {
+            const skipLog = [
+                'admin::user',
+                'admin::role',
+                'admin::permission',
+                'plugin::upload.file',
+            ]
+            if (!attrObject || !skipLog.includes(attrObject.target)) {
+                console.log('attrObject', attrName, attrObject)
+            }
+        }
 
         // Skip if the attribute is empty
         if (D.isEmpty(attrObject)) continue
@@ -61,8 +84,10 @@ export function getFullPopulateObject(
                 attrObject.component,
                 maxDepth - 1,
                 skipCreatorFields,
-                ignore,
-                debug
+                ignoreFields,
+                ignorePaths,
+                debug,
+                fullFieldName
             )
         } else if (attrObject.type === 'dynamiczone') {
             const dynamicPopulate = attrObject.components.reduce((prev, cur) => {
@@ -70,8 +95,10 @@ export function getFullPopulateObject(
                     cur,
                     maxDepth - 1,
                     skipCreatorFields,
-                    ignore,
-                    debug
+                    ignoreFields,
+                    ignorePaths,
+                    debug,
+                    fullFieldName
                 )
                 return curPopulate === true ? prev : deepAssign(prev, curPopulate)
             }, {})
@@ -85,8 +112,10 @@ export function getFullPopulateObject(
                 attrObject.target,
                 maxDepth - 1,
                 skipCreatorFields,
-                ignore,
-                debug
+                ignoreFields,
+                ignorePaths,
+                debug,
+                fullFieldName
             )
             if (!D.isEmpty(relationPopulate)) {
                 populate[attrName] = relationPopulate
