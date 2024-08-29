@@ -67,7 +67,9 @@ Add the following code snippet:
         skipCreatorFields: false,
         // Array of fields to always ignore.
         // Must be type of ['relation', 'component', 'dynamiczone', 'media']
-        ignore: ['localizations', 'strapi_stage'],
+        ignoreFields: ['localizations', 'strapi_stage'],
+        // Array of paths to always ignore.
+        ignorePaths: ['categories.relPosts'],
         // Enable debug mode for detailed logs
         debug: false,
         // Array of models where deep population is allowed e.g. ['api::page.page', 'api::post.post']
@@ -131,10 +133,33 @@ For example, to exclude the seo field from population:
 /api/articles?populate=deep&populateIgnore=seo
 ```
 
+You can also ignore model ID combined with relation name. For example, to exclude the `seo` field from population which is in `posts` model (model.relationName):
+
+```
+/api/articles?populate=deep&populateIgnore=posts.seo
+/api/articles?populate=deep&populateIgnore=posts.seo,model.relationName
+```
+
 You can comma-separate multiple fields to ignore. For instance, to exclude both the `seo` field and a relation named `relPosts`:
 
 ```
 /api/articles?populate=deep&populateIgnore=seo,relPosts
+```
+
+### Excluding Specific Paths from Population
+
+Use the `populateIgnorePaths` parameter to prevent specific paths from being populated. This allows you to customize your API responses by omitting unnecessary data.
+
+For example, to exclude the `categories.relPosts` path from population:
+
+```
+/api/articles?populate=deep&populateIgnorePaths=categories.relPosts
+```
+
+You can comma-separate multiple paths to ignore. For instance, to exclude both the `categories.relPosts` path and a `tags` path:
+
+```
+/api/articles?populate=deep&populateIgnorePaths=categories.relPosts,tags
 ```
 
 ## 🤝 Contributing
