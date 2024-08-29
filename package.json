@@ -27,7 +27,8 @@
         "@mobily/ts-belt": "^3.13.1",
         "@strapi/design-system": "^1.19.0",
         "@strapi/helper-plugin": "^4.25.4",
-        "@strapi/icons": "^1.19.0"
+        "@strapi/icons": "^1.19.0",
+        "yup": "^1.4.0"
     },
     "devDependencies": {
         "@strapi/strapi": "^4.25.4",
